@@ -1,5 +1,5 @@
 ---
-import Navbar from "../components/Navbar.astro";
+import MainLayout from "../layouts/MainLayout.astro";
 
 
 const name = 'Yeison Martinez';
@@ -7,37 +7,20 @@ const title = 'Home Page';
 
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body>
-		<Navbar />
+<MainLayout title="Home page">
+	<h1>{name}</h1>
+	<p>Momento actual: { new Date().toLocaleTimeString() }</p>
+	<p id="current-time"></p>
+	
+	<script>
+		
+		const currentTime: String = new Date().toLocaleTimeString();
+	
+		const paragraph = document.querySelector(
+			'#current-time'
+		) as HTMLParagraphElement;
+		
+		paragraph.innerText =  `Año actual ${currentTime}`;
+	</script>
+</MainLayout>
 
-
-		<h1>{name}</h1>
-		<p>Momento actual: { new Date().toLocaleTimeString() }</p>
-		<p id="current-time"></p>
-
-		<footer>
-			{ new Date().getFullYear() }
-		</footer>
-
-		<script>
-			const currentYear: number = new Date().getFullYear();
-			const currentTime: String = new Date().toLocaleTimeString();
-
-			const footer = document.querySelector('footer') as HTMLElement;
-			const paragraph = document.querySelector(
-				'#current-time'
-			) as HTMLParagraphElement;
-
-			footer.innerText = `Año ${currentYear}`;
-			paragraph.innerText =  `Año actual ${currentTime}`;
-		</script>
-	</body>
-</html>
